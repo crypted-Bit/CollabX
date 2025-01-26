@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="base :: Layout(~{::#content})">
+<head>
+<meta charset="UTF-8">
+<title>Register Page</title>
+</head>
+<body>
+<h1>Hello Dear My Name is Anuran Pradhan</h1>
+
+<div id="content">
+<div class='container'>
+<div class="row">
+<div class="col-md-6 offset-md-3">
+
+ <div class="my-card mt-3"  style="border-radius:7px">
+<div th:if="${message}" th:classappend="${message.type}"  class="alert" role="alert" >
+  <p class="text-center" th:text="${message.content}"></p>
+</div>
+ <h2 class="text-center">Register Here</h2>
+ 
+ <form novalidate action="" th:action="@{/do_register}" method="post" th:object="${user}">
+ <!-- First Name -->
+ <div class="mb-3">
+  <label for="firstname" class="form-label"> First Name:</label>
+  <input name="firstname" th:value="${user.firstname}" type="text" class="form-control"
+  th:classappend="${#fields.hasErrors('firstname')?'is-invalid':''}"
+   id="firstname" placeholder="Enter your first name" required>
+  <div class="invalid-feedback" th:each="e:${#fields.errors('firstname')}" th:text="${e}">
+      Looks good!
+    </div>
+</div>
+
+
+<!-- Second Name -->
+<div class="mb-3">
+  <label for="secondname" class="form-label"> Second Name:</label>
+  <input name="secondname" th:value="${user.secondname}" type="text" class="form-control"
+  th:classappend="${#fields.hasErrors('secondname')?'is-invalid':''}"
+   id="secondname" placeholder="Enter your second name" required>
+  <div class="invalid-feedback" th:each="e:${#fields.errors('secondname')}" th:text="${e}">
+      Looks good!
+    </div>
+</div>
+
+<div class="mb-3">
+  <label for="email" class="form-label"> Email:</label>
+  <input name="email" th:value="${user.email}" type="email" class="form-control" id="email" placeholder="Enter your email" th:classappend="${#fields.hasErrors('email')?'is-invalid':''}" required>
+  <div class="invalid-feedback" th:each="e:${#fields.errors('email')}" th:text="${e}"></div>
+</div>
+
+<div class="mb-3">
+  <label for="password" class="form-label"> Password:</label>
+  <input name="password" th:value="${user.password}" type="password" class="form-control" id="password" placeholder="Enter your password" th:classappend="${#fields.hasErrors('password')?'is-invalid':''}" required>
+  <div class="invalid-feedback" th:each="e:${#fields.errors('password')}" th:text="${e}"></div>
+</div>
+<div class="mb-3">
+  <label for="repeatPassword" class="form-label"> Repeat Password:</label>
+  <input name="repeatPassword" th:value="${user.repeatPassword}" type="password" class="form-control" id="repeatPassword" placeholder="Repeat your password" th:classappend="${#fields.hasErrors('repeatPassword')?'is-invalid':''}" required>
+  <div class="invalid-feedback" th:each="e:${#fields.errors('repeatPassword')}" th:text="${e}"></div>
+</div>
+
+<!-- Age -->
+<div class="mb-3">
+  <label for="age" class="form-label"> Age:</label>
+  <input name="age" th:value="${user.age}" type="number" class="form-control" id="age" placeholder="Enter your age" th:classappend="${#fields.hasErrors('age')?'is-invalid':''}" required>
+  <div class="invalid-feedback" th:each="e:${#fields.errors('age')}" th:text="${e}"></div>
+</div>
+
+<!-- College -->
+<div class="mb-3">
+  <label for="college" class="form-label"> College:</label>
+  <input name="college" th:value="${user.college}" type="text" class="form-control" id="college" placeholder="Enter your college" th:classappend="${#fields.hasErrors('college')?'is-invalid':''}" required>
+  <div class="invalid-feedback" th:each="e:${#fields.errors('college')}" th:text="${e}"></div>
+</div>
+
+<!-- College Year -->
+<div class="mb-3">
+  <label for="collegeYear" class="form-label"> College Year:</label>
+  <input name="collegeYear" th:value="${user.collegeYear}" type="text" class="form-control" id="collegeYear" placeholder="Enter your college year" th:classappend="${#fields.hasErrors('collegeYear')?'is-invalid':''}" required>
+  <div class="invalid-feedback" th:each="e:${#fields.errors('collegeYear')}" th:text="${e}"></div>
+</div>
+
+<!-- Best Skill -->
+<div class="mb-3">
+  <label for="bestSkill" class="form-label"> Best Skill:</label>
+  <input name="bestSkill" th:value="${user.bestSkill}" type="text" class="form-control" id="bestSkill" placeholder="Enter your best skill" th:classappend="${#fields.hasErrors('bestSkill')?'is-invalid':''}" required>
+  <div class="invalid-feedback" th:each="e:${#fields.errors('bestSkill')}" th:text="${e}"></div>
+</div>
+
+<!-- City -->
+<div class="mb-3">
+  <label for="city" class="form-label"> City:</label>
+  <input name="city" th:value="${user.city}" type="text" class="form-control" id="city" placeholder="Enter your city" th:classappend="${#fields.hasErrors('city')?'is-invalid':''}" required>
+  <div class="invalid-feedback" th:each="e:${#fields.errors('city')}" th:text="${e}"></div>
+</div>
+
+<!-- Experience -->
+<div class="mb-3">
+  <label for="experience" class="form-label"> Experience:</label>
+  <textarea name="experience" th:value="${user.experience}" placeholder="Enter your experience" rows="5" class="form-control" th:classappend="${#fields.hasErrors('experience')?'is-invalid':''}" required></textarea>
+  <div class="invalid-feedback" th:each="e:${#fields.errors('experience')}" th:text="${e}"></div>
+</div>
+
+ <!-- Terms and condition -->
+ <div class="form-group form-check">
+ <input type="checkbox" name="agreement" class="form-check-input" id="agreement" required>
+ <label for="agreement">Accept Terms and Conditions</label>
+ </div>
+ 
+ <div class="container text-center">
+ <button type="submit" class="btn bg-primary text-white">Submit</button>
+ <button type="reset" class="btn btn-warning text-white">Reset</button>
+ </div>
+ </form>
+ 
+ </div>
+
+</div>
+
+</div>
+</div>
+</div>
+
+</body>
+</html>
