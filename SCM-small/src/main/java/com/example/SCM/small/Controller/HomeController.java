@@ -17,6 +17,7 @@ import com.example.SCM.helper.Message;
 import com.example.SCM.small.Dao.UserRepository;
 import com.example.SCM.small.entities.User;
 
+
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
@@ -24,13 +25,14 @@ import jakarta.validation.Valid;
 @Controller
 public class HomeController {
 	
-
+	
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
     private UserRepository userRepo;
    
+ 
     
     @RequestMapping("/home")
     public String home(Model model) {
@@ -51,6 +53,8 @@ public class HomeController {
         return "signup";
     }
     
+   
+
     @PostMapping("/do_register")
     public String register(@Valid @ModelAttribute("user") User user, BindingResult result1, Model model, HttpSession session, @RequestParam(value="agreement", defaultValue ="false") boolean agreement) {
         try {
@@ -59,6 +63,13 @@ public class HomeController {
             }
             if (result1.hasErrors()) {
                 model.addAttribute("user", user);
+                return "signup";
+            }
+            
+            // Check if email is already registered
+            if (userRepo.findByEmail(user.getEmail()) != null) {
+                model.addAttribute("user", user);
+                model.addAttribute("message", new Message("Email already registered", "alert-danger"));
                 return "signup";
             }
 
@@ -71,12 +82,14 @@ public class HomeController {
 
             user.setRole("ROLE_USER");
             user.setEnabled(true);
-            user.setImageUrl("callinging.jpg");
+            user.setImageUrl("calling.jpg");
             user.setPassword(passwordEncoder.encode(user.getPassword()));
 
             User result = this.userRepo.save(user);
             model.addAttribute("user", new User());
             model.addAttribute("message", new Message("Successfully Registered!!", "alert-success"));
+
+           
             return "signup";
 
         } catch (Exception e) {

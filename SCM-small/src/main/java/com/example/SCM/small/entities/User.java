@@ -1,7 +1,11 @@
 package com.example.SCM.small.entities;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -22,8 +26,7 @@ import jakarta.validation.constraints.Size;
 @Entity
 @Table(name = "USER")
 public class User {
-
-    @Id
+	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
